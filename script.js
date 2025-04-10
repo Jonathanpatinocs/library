@@ -19,30 +19,33 @@ mylibrary.push(testBook3)
 
 /* Display books */
 const bookscontainer = document.getElementById('books-container')
-mylibrary.forEach(book => {
-    const bookCard = document.createElement('div')
-    const titleHeading = document.createElement('h1')
-    titleHeading.textContent = book.title
-    titleHeading.style = "text-align: center;"
-    const authorHeading = document.createElement('h2')
-    authorHeading.style = "text-align: center;"
-    authorHeading.textContent = book.author
-    const pagesHeading = document.createElement('h3')
-    pagesHeading.textContent = "Pages: " + book.pages
-    const readHeading = document.createElement('h3')
-    readHeading.textContent = "Read: " + book.read
-    bookCard.className = 'book'
+function displayBooks() {
+    mylibrary.forEach(book => {
+        const bookCard = document.createElement('div')
+        const titleHeading = document.createElement('h1')
+        titleHeading.textContent = book.title
+        titleHeading.style = "text-align: center;"
+        const authorHeading = document.createElement('h2')
+        authorHeading.style = "text-align: center;"
+        authorHeading.textContent = book.author
+        const pagesHeading = document.createElement('h3')
+        pagesHeading.textContent = "Pages: " + book.pages
+        const readHeading = document.createElement('h3')
+        readHeading.textContent = "Read: " + book.read
+        bookCard.className = 'book'
+    
+        bookCard.append(titleHeading, authorHeading, pagesHeading, readHeading)
+    
+        bookscontainer.append(bookCard)
+    })
+}
 
-    bookCard.append(titleHeading, authorHeading, pagesHeading, readHeading)
+function clearDisplay() {
+    bookscontainer.innerHTML= ""
+}
 
-    bookscontainer.append(bookCard)
-});
 /* Add Book to Library*/
-function addBooktoLibrary() {
-    let title = prompt("Title:")
-    let author = prompt("Author")
-    let pages = prompt("Pages")
-    let read = prompt("Read? True or False")
+function addBooktoLibrary(title, author, pages, read) {
 
     let book = new Book(title, author, pages, read, crypto.randomUUID())
     mylibrary.push(book)
@@ -51,8 +54,55 @@ function addBooktoLibrary() {
 
 const addbookbutton = document.getElementById('add-book-button')
 const addbookdialog = document.getElementById('add-book-dialog')
+const bookform = document.getElementById('book-form')
+
+/* modal functions */
 addbookbutton.addEventListener('click', ()=> {
     addbookdialog.showModal();
+})
+
+function clearForm() {
+    const title = document.getElementById('title')
+    const author = document.getElementById('author')
+    const pages = document.getElementById('pages')
+    const read = document.getElementById('read')
+
+    title.value = ""
+    author.value = ""
+    pages.value = ""
+    read.checked = false
+}
+bookform.addEventListener('submit', (e)=> {
+    e.preventDefault()
+    const formData = new FormData(bookform)
+
+    const title = formData.get('title')
+    const author = formData.get('author')
+    const pages = formData.get('pages')
+    let read = formData.get('read')
+
+    if (read == 'on') {
+        read = true
+    } 
+    else {
+        read = false
+    }
+
+    addBooktoLibrary(title, author, pages, read)
+    clearDisplay()
+    displayBooks()
+    clearForm()
+    
+    addbookdialog.close()
+
+    
+
+})
+
+const exitdialog = document.getElementById('exit-dialog')
+
+exitdialog.addEventListener('click', ()=> {
+    addbookdialog.close()
 })
 
 
@@ -60,3 +110,4 @@ addbookbutton.addEventListener('click', ()=> {
 console.log(mylibrary)
 
 
+displayBooks()

@@ -14,11 +14,47 @@
     padding: 10px;
     border: black solid 1px;
     width: 200px;
+    min-width: 200px;
     height: 300px;
 }
 
 #books-container {
     display: flex;
+    justify-content: center;
     gap: 10px;
+    width: 100%;
+    flex-wrap: wrap;
 }
 
+/* Dialog */
+dialog {
+    height: 400px;
+    width: 300px;
+    
+}
+dialog > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+label {
+    font-size: 30px;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+form > div {
+    display: flex;
+    width: 100%;
+}
+form > div > input {
+    
+    width: 60%;
+    margin-left:auto;
+}
+#dialog-submit {
+    height: 50px;
+    border-radius: 10px;
+}
