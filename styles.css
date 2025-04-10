@@ -13,9 +13,12 @@
 .book {
     padding: 10px;
     border: black solid 1px;
-    width: 200px;
+    width: 220px;
     min-width: 200px;
     height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 #books-container {
@@ -26,6 +29,31 @@
     flex-wrap: wrap;
 }
 
+.read-button-true, .read-button-false {
+    width: 100%;
+    min-height: 40px;
+    margin-top: auto;
+    color: white;
+    font-size: 20px;
+    border-radius: 10px;
+    border: solid 0px;
+}
+.read-button-true {
+    background-color: #17B169;
+}
+.read-button-false {
+    background-color: #D2122E;
+    
+}
+.delete-button {
+    background-color: red;
+    border: solid 0px;
+    border-radius: 10px;
+    width: 30px;
+    color: white;
+    margin-top: 5px;
+    margin-left: auto;
+}
 /* Dialog */
 dialog {
     height: 400px;

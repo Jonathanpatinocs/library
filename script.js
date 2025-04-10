@@ -30,11 +30,21 @@ function displayBooks() {
         authorHeading.textContent = book.author
         const pagesHeading = document.createElement('h3')
         pagesHeading.textContent = "Pages: " + book.pages
-        const readHeading = document.createElement('h3')
-        readHeading.textContent = "Read: " + book.read
+        const readButton = document.createElement('button')
+        if (book.read) {
+            readButton.textContent = "Read"
+            readButton.className = 'read-button-true'
+        }
+        else {
+            readButton.textContent = "Not Read"
+            readButton.className = 'read-button-false'
+        }
+        const deleteButton = document.createElement('button')
+        deleteButton.textContent = 'X'
+        deleteButton.className = 'delete-button'
         bookCard.className = 'book'
     
-        bookCard.append(titleHeading, authorHeading, pagesHeading, readHeading)
+        bookCard.append(titleHeading, authorHeading, pagesHeading, readButton, deleteButton)
     
         bookscontainer.append(bookCard)
     })
