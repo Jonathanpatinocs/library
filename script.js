@@ -1,4 +1,5 @@
 const mylibrary = []
+
 function Book(title, author, pages, read, id) {
     this.title = title;
     this.author = author;
@@ -16,6 +17,7 @@ mylibrary.push(testBook1)
 mylibrary.push(testBook2)
 mylibrary.push(testBook3)
 
+/* Display books */
 const bookscontainer = document.getElementById('books-container')
 mylibrary.forEach(book => {
     const bookCard = document.createElement('div')
@@ -35,8 +37,7 @@ mylibrary.forEach(book => {
 
     bookscontainer.append(bookCard)
 });
-
-console.log(mylibrary)
+/* Add Book to Library*/
 function addBooktoLibrary() {
     let title = prompt("Title:")
     let author = prompt("Author")
@@ -45,8 +46,17 @@ function addBooktoLibrary() {
 
     let book = new Book(title, author, pages, read, crypto.randomUUID())
     mylibrary.push(book)
-
     console.log(mylibrary);
 }
+
+const addbookbutton = document.getElementById('add-book-button')
+const addbookdialog = document.getElementById('add-book-dialog')
+addbookbutton.addEventListener('click', ()=> {
+    addbookdialog.showModal();
+})
+
+
+
+console.log(mylibrary)
 
 
