@@ -1,4 +1,4 @@
-const mylibrary = []
+let mylibrary = []
 
 function Book(title, author, pages, read, id) {
     this.title = title;
@@ -39,10 +39,33 @@ function displayBooks() {
             readButton.textContent = "Not Read"
             readButton.className = 'read-button-false'
         }
+
+        readButton.addEventListener('click', (e)=> {
+            if (readButton.className == 'read-button-true')
+            {
+                readButton.className = 'read-button-false'
+            }
+            else if (readButton.className == 'read-button-false')
+            {
+                readButton.className = 'read-button-true'
+            }
+        })
         const deleteButton = document.createElement('button')
         deleteButton.textContent = 'X'
+        deleteButton.id = book.id
         deleteButton.className = 'delete-button'
+
+
         bookCard.className = 'book'
+        bookCard.id = book.id
+
+        deleteButton.addEventListener('click', ()=> {
+            mylibrary = mylibrary.filter((item) => item.id != deleteButton.id)
+            console.log(mylibrary)
+            clearDisplay()
+            displayBooks()
+        })
+        
     
         bookCard.append(titleHeading, authorHeading, pagesHeading, readButton, deleteButton)
     
